@@ -15,7 +15,7 @@ export default class App extends Component {
   render() {
     let source;
     if (__DEV__) {
-      source = require('./index.html');
+      source = require('./tpl.html');
     } else {
       source = Platform.OS === 'ios' ? require('./tpl.html') : { uri: 'file:///android_asset/tpl.html' };
     }
