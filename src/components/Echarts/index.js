@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { WebView, View, StyleSheet } from 'react-native';
+import { WebView, View, StyleSheet,Platform} from 'react-native';
 import renderChart from './renderChart';
 import echarts from './echarts.min';
 
@@ -10,7 +10,16 @@ export default class App extends Component {
     }
   }
 
+
+
   render() {
+    let source;
+    if (__DEV__) {
+      source = require('./index.html');
+    } else {
+      source = Platform.OS === 'ios' ? require('./tpl.html') : { uri: 'file:///android_asset/tpl.html' };
+    }
+
     return (
       <View style={{flex: 1, height: this.props.height || 400,}}>
         <WebView
@@ -20,7 +29,7 @@ export default class App extends Component {
           style={{
             height: this.props.height || 400,
           }}
-          source={require('./tpl.html')}
+          source={source}
         />
       </View>
     );
