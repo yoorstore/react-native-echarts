@@ -5,7 +5,10 @@ import echarts from './echarts.min';
 
 export default class App extends Component {
   componentWillReceiveProps(nextProps) {
-    if(nextProps.option !== this.props.option) {
+//     if(nextProps.option !== this.props.option) {
+//       this.refs.chart.reload();
+//     }
+    if (JSON.stringify(nextProps) !== JSON.stringify(this.props)) {
       this.refs.chart.reload();
     }
   }
