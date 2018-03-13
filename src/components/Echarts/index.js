@@ -12,7 +12,10 @@ export default class App extends Component {
   }
 
   reload(option) {
-     this.refs.chart.injectJavaScript(`myChart.setOption(${toString(option)})`);
+     this.refs.chart.injectJavaScript(`
+      var myChart = echarts.init(document.getElementById('main'));
+      myChart.setOption(${toString(option)})
+    `);
   }
 
   render() {
