@@ -32,13 +32,24 @@ export default class App extends Component {
           ref="chart"
           scrollEnabled = {false}
           injectedJavaScript = {renderChart(this.props)}
+          javaScriptEnabled = {true}
           style={{
             height: this.props.height || 400,
             backgroundColor: this.props.backgroundColor || 'transparent'
           }}
           scalesPageToFit={Platform.OS === 'android'}          
           source={source}
-          onMessage={event => this.props.onPress ? this.props.onPress(JSON.parse(event.nativeEvent.data)) : null}
+          onMessage={(event) => {
+            let data = JSON.parse(event.nativeEvent.data);
+            console.log(data)
+            if (data.eventName === 'touchstart') {
+              this.props.onTouchBegin && this.props.onTouchBegin(data);
+            } else if (data.eventName === 'touchmove') {
+              this.props.onTouchMove && this.props.onTouchMove(data);
+            } else {
+              this.props.onPress && this.props.onPress(data);
+            }
+          }}
         />
       </View>
     );
