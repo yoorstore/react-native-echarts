@@ -41,7 +41,6 @@ export default class App extends Component {
           source={source}
           onMessage={(event) => {
             let data = JSON.parse(event.nativeEvent.data);
-            console.log(data)
             if (data.eventName === 'touchstart') {
               this.props.onTouchBegin && this.props.onTouchBegin(data);
             } else if (data.eventName === 'touchmove') {
